@@ -244,3 +244,22 @@ type MarketTickersRes struct {
 	Category string                `json:"category"` //產品類型
 	List     []MarketTickersResRow `json:"list"`
 }
+
+type MarketRecentTradeRes struct {
+	Category string `json:"category"` //產品類型
+	List     []struct {
+		ExecId       string `json:"execId"`        //成交id
+		Symbol       string `json:"symbol"`        //合約名稱
+		Price        string `json:"price"`         //成交價格
+		Size         string `json:"size"`          //成交數量
+		Side         string `json:"side"`          //吃單方向. Buy, Sell
+		Time         string `json:"time"`          //成交時間戳 (毫秒)
+		IsBlockTrade bool   `json:"isBlockTrade"`  //成交類型是否為大宗交易
+		IsRPITrade   bool   `json:"isRPITrade"`    //成交類型是否為RPI交易
+		MP           string `json:"mP,omitempty"`  //標記價格, 期權的特有字段
+		IP           string `json:"iP,omitempty"`  //指數價格, 期權的特有字段
+		MIv          string `json:"mIv,omitempty"` //標記iv, 期權的特有字段
+		Iv           string `json:"iv,omitempty"`  //iv, 期權的特有字段
+		Seq          string `json:"seq,omitempty"` //撮合版本號
+	} `json:"list"`
+}

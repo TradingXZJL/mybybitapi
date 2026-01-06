@@ -67,3 +67,15 @@ func (api *MarketTickersAPI) Do() (*BybitRestRes[MarketTickersRes], error) {
 	url := bybitHandlerRequestAPIWithPathQueryParam(REST, api.req, PublicRestAPIMap[MarketTickers])
 	return bybitCallAPI[MarketTickersRes](api.client.c, url, NIL_REQBODY, GET)
 }
+
+// bybit MarketRecentTrade PublicRest接口 GET 查詢平台最近成交歷史
+func (client *PublicRestClient) NewMarketRecentTrade() *MarketRecentTradeAPI {
+	return &MarketRecentTradeAPI{
+		client: client,
+		req:    &MarketRecentTradeReq{},
+	}
+}
+func (api *MarketRecentTradeAPI) Do() (*BybitRestRes[MarketRecentTradeRes], error) {
+	url := bybitHandlerRequestAPIWithPathQueryParam(REST, api.req, PublicRestAPIMap[MarketRecentTrade])
+	return bybitCallAPI[MarketRecentTradeRes](api.client.c, url, NIL_REQBODY, GET)
+}

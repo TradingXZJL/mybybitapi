@@ -188,3 +188,47 @@ func (api *MarketTickersAPI) ExpDate(expDate string) *MarketTickersAPI {
 	api.req.ExpDate = GetPointer(expDate)
 	return api
 }
+
+type MarketRecentTradeReq struct {
+	Category   *string `json:"category"`   //String	true	string	產品類型. spot,linear,inverse,option
+	Symbol     *string `json:"symbol"`     //String	false	string	合約名稱
+	BaseCoin   *string `json:"baseCoin"`   //String	false	string	交易幣種. 僅option, 若不傳, 則默認返回BTC數據
+	OptionType *string `json:"optionType"` //String	false	string	期權類型. Call 或 Put. 僅option
+	Limit      *int    `json:"limit"`      //String	false	integer	每頁數量限制. Spot: [1,60], 默认: 60. others: [1,1000], 默認: 500
+}
+type MarketRecentTradeAPI struct {
+	client *PublicRestClient
+	req    *MarketRecentTradeReq
+}
+
+// category	true	string	產品類型. spot,linear,inverse,option
+func (api *MarketRecentTradeAPI) Category(category string) *MarketRecentTradeAPI {
+	api.req.Category = GetPointer(category)
+	return api
+}
+
+// symbol	false	string	合約名稱
+func (api *MarketRecentTradeAPI) Symbol(symbol string) *MarketRecentTradeAPI {
+	api.req.Symbol = GetPointer(symbol)
+	return api
+}
+
+// baseCoin	false	string	交易幣種. 僅option, 若不傳, 則默認返回BTC數據
+func (api *MarketRecentTradeAPI) BaseCoin(baseCoin string) *MarketRecentTradeAPI {
+	api.req.BaseCoin = GetPointer(baseCoin)
+	return api
+}
+
+// optionType	false	string	期權類型. Call 或 Put. 僅option
+func (api *MarketRecentTradeAPI) OptionType(optionType string) *MarketRecentTradeAPI {
+	api.req.OptionType = GetPointer(optionType)
+	return api
+}
+
+// limit	false	integer	每頁數量限制.
+// spot: [1,60], 默认: 60.
+// others: [1,1000], 默認: 500
+func (api *MarketRecentTradeAPI) Limit(limit int) *MarketRecentTradeAPI {
+	api.req.Limit = &limit
+	return api
+}
